@@ -1,0 +1,37 @@
+name: qr_kantin_mobile
+description: "QR Kantin sistemi için geliştirilmiş, WebSocket ve QR entegrasyonuna sahip Flutter uygulaması."
+publish_to: 'none'
+
+environment:
+  sdk: '^3.11.0' # Terminalin önerdiği Dart SDK sürümü
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  
+  # State Management & DI
+  flutter_riverpod: ^2.4.9
+  
+  # Network & API
+  dio: ^5.4.0
+  web_socket_channel: ^2.4.0
+  
+  # Storage (JWT Token saklamak için)
+  flutter_secure_storage: ^9.0.0
+  
+  # UI & Utilities
+  qr_flutter: ^4.1.0 # QR token'ı ekranda çizmek için
+  go_router: ^12.1.1 # Sayfa yönlendirmelerini profesyonelce yapmak için
+  
+  # Model & JSON Parsing
+  json_annotation: ^4.8.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.7
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
