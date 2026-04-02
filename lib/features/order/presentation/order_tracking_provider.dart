@@ -6,6 +6,7 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import '../../../core/constants/app_constants.dart';
 import '../../../core/network/dio_client.dart';
 import '../../auth/presentation/auth_provider.dart';
 import '../domain/order_model.dart';
@@ -28,7 +29,7 @@ final myOrdersProvider = FutureProvider.autoDispose<List<OrderModel>>((ref) asyn
 
 // Canlı WebSocket Dinleyicisi
 final orderWebSocketProvider = Provider.autoDispose((ref) {
-  final channel = WebSocketChannel.connect(Uri.parse('ws://127.0.0.1:1323/ws'));
+  final channel = WebSocketChannel.connect(Uri.parse(AppConstants.wsUrl));
 
   channel.stream.listen((message) {
     final data = jsonDecode(message);

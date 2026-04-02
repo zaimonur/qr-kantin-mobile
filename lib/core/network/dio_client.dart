@@ -4,6 +4,7 @@
 /// @license Yazılı izin alınmadan ticari amaçla kullanılamaz.
 
 import 'package:dio/dio.dart';
+import '../constants/app_constants.dart';
 import 'auth_interceptor.dart';
 
 class DioClient {
@@ -13,7 +14,7 @@ class DioClient {
     _dio = Dio(
       BaseOptions(
         // Sunucu IP adresimiz ve backend'in çalıştığı port
-        baseUrl: 'http://188.132.165.48:8080',
+        baseUrl: AppConstants.baseUrl,
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
         headers: {
