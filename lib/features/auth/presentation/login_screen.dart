@@ -92,6 +92,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ElevatedButton(
                   onPressed: _isLoading ? null : _handleLogin,
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: _isLoading ? Colors.black : Colors.blueAccent, // Arka plan rengi
+                    foregroundColor: Colors.white,      // Yazı ve ikon rengi
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),

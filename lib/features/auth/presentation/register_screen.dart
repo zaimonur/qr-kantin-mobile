@@ -134,6 +134,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               ElevatedButton(
                 onPressed: _isLoading ? null : _handleRegister,
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: _isLoading ? Colors.black : Colors.blueAccent,// Arka plan rengi
+                  foregroundColor: Colors.white,      // Yazı ve ikon rengi
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
