@@ -13,7 +13,7 @@ class DioClient {
     _dio = Dio(
       BaseOptions(
         // Sunucu IP adresimiz ve backend'in çalıştığı port
-        baseUrl: 'http://localhost:1323',
+        baseUrl: 'http://188.132.165.48:8080',
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
         headers: {
