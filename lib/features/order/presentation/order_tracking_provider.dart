@@ -29,43 +29,33 @@ final myOrdersProvider = FutureProvider.autoDispose<List<OrderModel>>((ref) asyn
 });
 
 // Canlı WebSocket Dinleyicisi
-final orderWebSocketProvider = Provider.autoDispose((ref) {
-  WebSocketChannel? channel;
+final orderWebSocketProvider = StreamProvider.autoDispose<dynamic>((ref) async* {
+  const storage = FlutterSecureStorage();
 
-  // 1. Asenkron olarak güvenli kasadan token'ı alıp bağlantıyı başlatan fonksiyon
-  Future<void> initWebSocket() async {
-    const storage = FlutterSecureStorage();
+  // Anahtar 'jwt_token'
+  final token = await storage.read(key: 'jwt_token') ?? '';
 
-    // NOT: Projende token'ı kaydederken kullandığın key neyse ('token' varsayıyorum) onu yaz
-    final token = await storage.read(key: 'token') ?? '';
+  if (token.isEmpty) return;
 
-    // 2. Token'ı URL'e ekle
-    final wsUrlWithToken = '${AppConstants.wsUrl}?token=$token';
-    channel = WebSocketChannel.connect(Uri.parse(wsUrlWithToken));
+  // Token dolu geldiği zaman kapı açılacak
+  final wsUrlWithToken = '${AppConstants.wsUrl}?token=$token';
+  final channel = WebSocketChannel.connect(Uri.parse(wsUrlWithToken));
 
-    // 3. Mesajları Dinle
-    channel!.stream.listen((message) {
-      final data = jsonDecode(message);
+  ref.onDispose(() => channel.sink.close());
 
-      if (data['type'] == 'STATUS_UPDATE') {
-        ref.invalidate(myOrdersProvider);
+  await for (final message in channel.stream) {
+    final data = jsonDecode(message);
 
-        final dio = ref.read(dioClientProvider).dio;
-        dio.get('/api/wallet/balance').then((response) {
-          final currentBalance = (response.data['balance'] as num).toDouble();
-          ref.read(authProvider.notifier).updateBalance(currentBalance);
-        }).catchError((_) {});
-      }
-    });
+    if (data['type'] == 'STATUS_UPDATE') {
+      // Siparişleri ve bakiyeyi anlık tazele
+      ref.invalidate(myOrdersProvider);
+
+      final dio = ref.read(dioClientProvider).dio;
+      dio.get('/api/wallet/balance').then((response) {
+        final currentBalance = (response.data['balance'] as num).toDouble();
+        ref.read(authProvider.notifier).updateBalance(currentBalance);
+      });
+    }
+    yield data;
   }
-
-  // Fonksiyonu tetikle
-  initWebSocket();
-
-  // Sayfadan çıkıldığında bağlantıyı temizle
-  ref.onDispose(() {
-    channel?.sink.close();
-  });
-
-  return channel;
 });
