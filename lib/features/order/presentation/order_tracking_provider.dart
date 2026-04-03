@@ -10,6 +10,7 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/network/dio_client.dart';
 import '../../auth/presentation/auth_provider.dart';
 import '../domain/order_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 // API'den siparişleri çeken FutureProvider
 final myOrdersProvider = FutureProvider.autoDispose<List<OrderModel>>((ref) async {
@@ -29,33 +30,42 @@ final myOrdersProvider = FutureProvider.autoDispose<List<OrderModel>>((ref) asyn
 
 // Canlı WebSocket Dinleyicisi
 final orderWebSocketProvider = Provider.autoDispose((ref) {
-  final channel = WebSocketChannel.connect(Uri.parse(AppConstants.wsUrl));
+  WebSocketChannel? channel;
 
-  channel.stream.listen((message) {
-    final data = jsonDecode(message);
+  // 1. Asenkron olarak güvenli kasadan token'ı alıp bağlantıyı başlatan fonksiyon
+  Future<void> initWebSocket() async {
+    const storage = FlutterSecureStorage();
 
-    // Backend'den "STATUS_UPDATE" sinyali gelirse (İade, Onay vs.)
-    if (data['type'] == 'STATUS_UPDATE') {
+    // NOT: Projende token'ı kaydederken kullandığın key neyse ('token' varsayıyorum) onu yaz
+    final token = await storage.read(key: 'token') ?? '';
 
-      // 1. Sipariş listesini tazeleyelim
-      ref.invalidate(myOrdersProvider);
+    // 2. Token'ı URL'e ekle
+    final wsUrlWithToken = '${AppConstants.wsUrl}?token=$token';
+    channel = WebSocketChannel.connect(Uri.parse(wsUrlWithToken));
 
-      // 2. İade (Refund) ihtimaline karşı cüzdanı da API'den tazeleyelim
-      final dio = ref.read(dioClientProvider).dio;
-      dio.get('/api/wallet/balance').then((response) {
-        final currentBalance = (response.data['balance'] as num).toDouble();
+    // 3. Mesajları Dinle
+    channel!.stream.listen((message) {
+      final data = jsonDecode(message);
 
-        // Riverpod ile ekrandaki cüzdanı güncelleyelim
-        ref.read(authProvider.notifier).updateBalance(currentBalance);
+      if (data['type'] == 'STATUS_UPDATE') {
+        ref.invalidate(myOrdersProvider);
 
-      }).catchError((_) {
-        // Hata durumunda uygulamanın sürekliliğini koru ve logla.
-      });
-    }
-  });
+        final dio = ref.read(dioClientProvider).dio;
+        dio.get('/api/wallet/balance').then((response) {
+          final currentBalance = (response.data['balance'] as num).toDouble();
+          ref.read(authProvider.notifier).updateBalance(currentBalance);
+        }).catchError((_) {});
+      }
+    });
+  }
+
+  // Fonksiyonu tetikle
+  initWebSocket();
 
   // Sayfadan çıkıldığında bağlantıyı temizle
-  ref.onDispose(() => channel.sink.close());
+  ref.onDispose(() {
+    channel?.sink.close();
+  });
 
   return channel;
 });
