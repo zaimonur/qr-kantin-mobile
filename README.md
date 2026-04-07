@@ -1,30 +1,75 @@
 # QR Kantin - Mobil Uygulama
 
-<p align="center">
-  <img src="screenshots/login.png" width="150" alt="Giriş Ekranı" />
-  &nbsp;&nbsp;&nbsp;
-  <img src="screenshots/register.png" width="150" alt="Kayıt Ekranı" />
-</p>
+## 🧩 Ana Ekranlar
 
-<p align="center">
-  <img src="screenshots/menu.png" width="150" alt="Menü Ekranı" />
-  &nbsp;&nbsp;&nbsp;
-  <img src="screenshots/cart.png" width="150" alt="Sepet Ekranı" />
-</p>
+### 🔐 Kimlik Doğrulama & 🍔 Menü & 🛒 Sepet
 
-<p align="center">
-  <img src="screenshots/orderstatusawaitingapprov.png" width="150" alt="Sipariş Onay Bekliyor" />
-  &nbsp;&nbsp;&nbsp;
-  <img src="screenshots/orderstatusapproved.png" width="150" alt="Sipariş Onaylandı" />
-  &nbsp;&nbsp;&nbsp;
-  <img src="screenshots/orderstatusready.png" width="150" alt="Sipariş Hazır" />
-   &nbsp;&nbsp;&nbsp;
-  <img src="screenshots/pastorders.png" width="150" alt="Geçmiş Siparişleri Görme" />
-</p>
+<div align="center">
+<table>
+  <tr>
+    <td>
+      <img src="screenshots/login.png" width="200" alt="Giriş Ekranı">
+    </td>
+    <td>
+      <img src="screenshots/register.png" width="200" alt="Kayıt Ekranı">
+    </td>
+    <td>
+      <img src="screenshots/menu.png" width="200" alt="Menü Ekranı">
+    </td>
+    <td>
+      <img src="screenshots/cart.png" width="200" alt="Sepet Ekranı">
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><b>Giriş Ekranı</b></td>
+    <td align="center"><b>Kayıt Ekranı</b></td>
+    <td align="center"><b>Menü Ekranı</b></td>
+    <td align="center"><b>Sepet Ekranı</b></td>
+  </tr>
+</table>
+</div>
 
-<p align="center">
-  <img src="screenshots/wallet.png" width="150" alt="Cüzdan Ekranı" />
-</p>
+### 📦 Sipariş Takibi & ⏱️ Geçmiş
+
+<div align="center">
+<table>
+  <tr>
+    <td>
+      <img src="screenshots/orderstatusawaitingapprov.png" width="200" alt="Sipariş Onay Bekliyor">
+    </td>
+    <td>
+      <img src="screenshots/orderstatusapproved.png" width="200" alt="Sipariş Onaylandı">
+    </td>
+    <td>
+      <img src="screenshots/orderstatusready.png" width="200" alt="Sipariş Hazır">
+    </td>
+    <td>
+      <img src="screenshots/pastorders.png" width="200" alt="Geçmiş Siparişler">
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><b>Onay Bekliyor</b></td>
+    <td align="center"><b>Onaylandı</b></td>
+    <td align="center"><b>Sipariş Hazır</b></td>
+    <td align="center"><b>Geçmiş Siparişler</b></td>
+  </tr>
+</table>
+</div>
+
+### 💳 Cüzdan Yönetimi
+
+<div align="center">
+<table>
+  <tr>
+    <td>
+      <img src="screenshots/wallet.png" width="200" alt="Cüzdan Ekranı">
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><b>Cüzdan Ekranı</b></td>
+  </tr>
+</table>
+</div>
 
 Bu proje, **QR Kantin** sisteminin kullanıcı (öğrenci/öğretmen) tarafındaki mobil uygulamasıdır. Flutter SDK kullanılarak geliştirilen uygulama; hızlı sipariş, dijital cüzdan yönetimi ve canlı sipariş takibi gibi özellikleri modern bir arayüzle sunar.
 
