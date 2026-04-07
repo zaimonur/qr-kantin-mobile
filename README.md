@@ -1,5 +1,31 @@
 # QR Kantin - Mobil Uygulama
 
+<p align="center">
+  <img src="screenshots/login.png" width="220" alt="Giriş Ekranı" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="screenshots/register.png" width="220" alt="Kayıt Ekranı" />
+</p>
+
+<p align="center">
+  <img src="screenshots/menu.png" width="220" alt="Menü Ekranı" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="screenshots/cart.png" width="220" alt="Sepet Ekranı" />
+</p>
+
+<p align="center">
+  <img src="screenshots/orderstatusawaitingapprov.png" width="220" alt="Sipariş Onay Bekliyor" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="screenshots/orderstatusapproved.png" width="220" alt="Sipariş Onaylandı" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="screenshots/orderstatusready.png" width="220" alt="Sipariş Hazır" />
+   &nbsp;&nbsp;&nbsp;
+  <img src="screenshots/pastorders.png" width="220" alt="Geçmiş Siparişleri Görme" />
+</p>
+
+<p align="center">
+  <img src="screenshots/wallet.png" width="220" alt="Cüzdan Ekranı" />
+</p>
+
 Bu proje, **QR Kantin** sisteminin kullanıcı (öğrenci/öğretmen) tarafındaki mobil uygulamasıdır. Flutter SDK kullanılarak geliştirilen uygulama; hızlı sipariş, dijital cüzdan yönetimi ve canlı sipariş takibi gibi özellikleri modern bir arayüzle sunar.
 
 ## 🚀 Öne Çıkan Özellikler
